@@ -14,62 +14,142 @@ st.set_page_config(
 # STILI CSS CUSTOM (LUXURY THEME)
 # ==========================================
 def inject_custom_css():
-    """Inietta il CSS per la UI/UX di lusso, ottimizzato per desktop e mobile."""
+    """Inietta il CSS per la UI/UX di lusso, con animazioni avanzate per la Hero Section."""
     custom_css = """
     <style>
-        /* Palette e Tipografia */
+        /* =========================================
+           Palette e Setup Globale
+           ========================================= */
         :root {
-            --bg-color: #0B132B; /* Blu notte profondo */
-            --card-bg: #1C2541; /* Antracite */
+            --bg-color: #0B132B; 
+            --card-bg: #1C2541; 
             --text-main: #F8F9FA;
             --text-muted: #A1A9CE;
-            --gold-accent: #D4AF37; /* Oro pallido */
+            --gold-accent: #D4AF37; 
         }
         
-        /* Reset e Background Globale */
         .stApp {
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
         }
         
-        /* Nasconde header e footer standard di Streamlit */
         header {visibility: hidden;}
         footer {visibility: hidden;}
         
-        /* Stili Hero Section */
-        .hero-container {
-            text-align: center;
-            padding: 4rem 1rem;
-            background: linear-gradient(180deg, rgba(28,37,65,0.8) 0%, rgba(11,19,43,1) 100%);
-            border-bottom: 2px solid var(--gold-accent);
-            border-radius: 0 0 20px 20px;
-            margin-bottom: 3rem;
+        /* =========================================
+           Animazioni Dinamiche
+           ========================================= */
+        @keyframes slowZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
         }
-        .hero-title {
-            color: var(--gold-accent);
-            font-size: 3.5rem;
-            font-weight: 300;
-            letter-spacing: 2px;
-            margin-bottom: 1rem;
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
-        .hero-subtitle {
-            color: var(--text-main);
-            font-size: 1.5rem;
-            font-weight: 300;
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 10px rgba(212, 175, 55, 0.2); }
+            50% { text-shadow: 0 0 20px rgba(212, 175, 55, 0.6); }
+            100% { text-shadow: 0 0 10px rgba(212, 175, 55, 0.2); }
         }
         
-        /* Stili Cards Servizi e Quartieri */
+        /* =========================================
+           Nuova Hero Section (Banner Rettangolare)
+           ========================================= */
+        .hero-wrapper {
+            position: relative;
+            width: 100%;
+            height: 55vh; /* Proporzione rettangolare dinamica */
+            min-height: 450px;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1rem;
+            margin-bottom: 4rem;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            border: 1px solid rgba(212, 175, 55, 0.15); /* Sottile bordo dorato */
+        }
+
+        /* Sfondo con immagine di Roma, Overlay Scuro ed Effetto Zoom */
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            /* Immagine di architettura classica con gradiente blu/antracite */
+            background-image: linear-gradient(180deg, rgba(11,19,43,0.6) 0%, rgba(11,19,43,0.95) 100%), url('https://images.unsplash.com/photo-1552832230-c0197dd311b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center 30%;
+            animation: slowZoom 25s infinite alternate ease-in-out;
+            z-index: 1;
+        }
+
+        /* Contenitore Testo sopra lo sfondo */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem 4rem;
+            max-width: 1000px;
+            animation: fadeInUp 1.5s ease-out;
+            background: rgba(11, 19, 43, 0.3);
+            border-radius: 16px;
+            backdrop-filter: blur(4px); /* Effetto vetro elegante */
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Scritta Coordinata: Rome Luxury Dreams */
+        .hero-logo {
+            font-size: 1.1rem;
+            color: var(--gold-accent);
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            display: inline-block;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.5);
+            padding-bottom: 0.5rem;
+            animation: glow 4s infinite;
+        }
+        
+        .hero-title {
+            color: #FFFFFF;
+            font-size: 3.2rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.8);
+        }
+        
+        .hero-subtitle {
+            color: var(--text-muted);
+            font-size: 1.3rem;
+            font-weight: 300;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* =========================================
+           Stili Cards e Sezioni
+           ========================================= */
         .luxury-card {
             background-color: var(--card-bg);
             padding: 2rem;
             border-radius: 10px;
             border-left: 3px solid var(--gold-accent);
             height: 100%;
-            transition: transform 0.3s ease;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
         .luxury-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+            border-left-width: 6px;
         }
         .card-title {
             color: var(--gold-accent);
@@ -82,34 +162,35 @@ def inject_custom_css():
             font-size: 1rem;
             line-height: 1.5;
         }
-        
-        /* Tipografia Sezioni */
         .section-header {
             color: var(--gold-accent);
             font-size: 2.2rem;
             text-align: center;
             margin-top: 3rem;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             font-weight: 300;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
     </style>
     """
     st.markdown(custom_css, unsafe_allow_html=True)
 
-# ==========================================
-# COMPONENTI DELLA PAGINA (MODULARI)
-# ==========================================
+
 def render_hero_section():
-    """Rende l'intestazione principale della Single Page App."""
+    """Rende il banner dinamico e coordinato della Hero Section."""
     hero_html = """
-    <div class="hero-container">
-        <h1 class="hero-title">La Chiave per la Tua Dimora Esclusiva nella Città Eterna</h1>
-        <p class="hero-subtitle">Ricerca off-market, negoziazione riservata e accesso privilegiato alle proprietà più prestigiose di Roma.</p>
+    <div class="hero-wrapper">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-logo">Rome Luxury Dreams</div>
+            <h1 class="hero-title">La Chiave per la Tua Dimora Esclusiva nella Città Eterna</h1>
+            <p class="hero-subtitle">Ricerca off-market, negoziazione riservata e accesso privilegiato al patrimonio immobiliare più prestigioso di Roma.</p>
+        </div>
     </div>
     """
     st.markdown(hero_html, unsafe_allow_html=True)
+
 
 def render_services_section():
     """Rende la sezione 'Come Funziona' con layout a colonne."""
