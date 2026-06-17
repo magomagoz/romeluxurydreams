@@ -1,4 +1,7 @@
 import streamlit as st
+import base64
+import os
+
 
 # ==========================================
 # CONFIGURAZIONE PAGINA
@@ -176,21 +179,48 @@ def inject_custom_css():
     """
     st.markdown(custom_css, unsafe_allow_html=True)
 
+# ==========================================
+# FUNZIONE HELPER PER IMMAGINI LOCALI
+# ==========================================
+def get_base64_of_image(image_path):
+    """Legge un'immagine locale e la converte in stringa Base64 per l'HTML."""
+    with open(image_path, "rb") as input_file:
+        data = input_file.read()
+    return base64.b64encode(data).decode()
 
+# ==========================================
+# COMPONENTI DELLA PAGINA AGGIORNATI
+# ==========================================
 def render_hero_section():
-    """Rende il banner dinamico e coordinato della Hero Section."""
-    hero_html = """
+    """Rende il banner hero leggendo il logo direttamente dalla repository GitHub."""
+    
+    # Definiamo il percorso del logo (può essere nella root o in una cartella assets)
+    logo_path = "logo.png" 
+    
+    # Controlliamo se il file esiste (evita crash se ti dimentichi di caricarlo localmente)
+    if os.path.exists(logo_path):
+        base64_str = get_base64_of_image(logo_path)
+        logo_src = f"data:image/png;base64,{base64_str}"
+    else:
+        # Segnaposto elegante se il file non viene trovato
+        logo_src = "https://via.placeholder.com/150" 
+    
+    hero_html = f"""
     <div class="hero-wrapper">
         <div class="hero-bg"></div>
         <div class="hero-content">
-            <div class="hero-logo">Rome Luxury Dreams</div>
-            <h1 class="hero-title">La Chiave per la Tua Dimora Esclusiva nella Città Eterna</h1>
-            <p class="hero-subtitle">Ricerca off-market, negoziazione riservata e accesso privilegiato al patrimonio immobiliare più prestigioso di Roma.</p>
+            <div class="hero-text-block">
+                <div class="hero-logo">Rome Luxury Dreams</div>
+                <h1 class="hero-title">La Chiave per la Tua Dimora Esclusiva nella Città Eterna</h1>
+                <p class="hero-subtitle">Ricerca off-market, negoziazione riservata e accesso privilegiato al patrimonio immobiliare più prestigioso di Roma.</p>
+            </div>
+            <div class="hero-logo-right-container">
+                <img src="{logo_src}" alt="Rome Luxury Dreams Logo" class="hero-logo-right">
+            </div>
         </div>
     </div>
     """
     st.markdown(hero_html, unsafe_allow_html=True)
-
 
 def render_services_section():
     """Rende la sezione 'Come Funziona' con layout a colonne."""
