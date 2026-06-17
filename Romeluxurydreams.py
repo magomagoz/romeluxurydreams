@@ -223,7 +223,7 @@ def render_hero_section():
                 <img src="{logo_src}" alt="Rome Luxury Dreams Logo" class="hero-logo-graphic">
             </div>
             <div class="hero-brand-text">Rome Luxury Dreams</div>
-            <h1 class="hero-title">La Chiave per la Tua Dimora Esclusiva nella Città Eterna</h1>
+            <h1 class="hero-title">La Tua Dimora Esclusiva nella Città Eterna</h1>
             <p class="hero-subtitle">Ricerca off-market, negoziazione riservata e accesso privilegiato al patrimonio immobiliare più prestigioso di Roma.</p>
         </div>
     </div>
