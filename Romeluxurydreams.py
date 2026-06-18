@@ -420,18 +420,18 @@ def inject_custom_css():
     st.markdown(custom_css, unsafe_allow_html=True)
 
 def inject_rtl_css():
-rtl_css = """
-<style>
-    .stApp {
-        direction: rtl;
-        text-align: right;
-    }
-    /* Assicura che le liste e i form siano allineati correttamente a destra */
-    ul { padding-right: 1.2rem; padding-left: 0; }
-    .stTextInput > div > div > input, .stTextArea > div > div > textarea { text-align: right; }
-</style>
-"""
-st.markdown(rtl_css, unsafe_allow_html=True)
+    rtl_css = """
+    <style>
+        .stApp {
+            direction: rtl;
+            text-align: right;
+        }
+        /* Assicura che le liste e i form siano allineati correttamente a destra */
+        ul { padding-right: 1.2rem; padding-left: 0; }
+        .stTextInput > div > div > input, .stTextArea > div > div > textarea { text-align: right; }
+    </style>
+    """
+    st.markdown(rtl_css, unsafe_allow_html=True)
 
 # ==========================================
 # RENDER DELLA SPLASH PAGE (SELEZIONE LINGUA)
