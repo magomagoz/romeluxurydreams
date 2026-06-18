@@ -592,10 +592,17 @@ def inject_rtl_css():
 # ==========================================
 # RENDER DELLA SPLASH PAGE (SELEZIONE LINGUA)
 # ==========================================
-# ==========================================
-# RENDER DELLA SPLASH PAGE (SELEZIONE LINGUA)
-# ==========================================
 def render_splash_page():
+    logo_src = get_base64_of_image("logo.png")
+    
+    # Intestazione con Logo e Titolo
+    st.markdown(f"""
+        <div class="splash-container">
+            <img src="{logo_src}" class="splash-logo" alt="Rome Luxury Dreams">
+            <h3>Select your language</h3>
+        </div>
+    """, unsafe_allow_html=True)
+    
     # --- PRIMA FILA (3 Pulsanti) ---
     # [1.5, 2, 2, 2, 1.5] allarga leggermente i margini laterali per bilanciare 3 colonne
     _, col1, col2, col3, _ = st.columns([1.5, 2, 2, 2, 1.5])
