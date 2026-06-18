@@ -688,7 +688,7 @@ def render_main_site(lang_dict, is_rtl=False):
     """Rende l'intero sito web utilizzando il dizionario della lingua scelta."""
     logo_src = get_base64_of_image("logo.png")
     
-    # URL Ottimizzato (corretto)
+    # 1. URL Ottimizzato
     video_url = "https://res.cloudinary.com/dcbyxecy4/video/upload/w_1280,q_auto,f_auto/Video_vtviy5.mp4" 
 
     hero_html = f"""
@@ -708,6 +708,7 @@ def render_main_site(lang_dict, is_rtl=False):
         </div>
     </div>
     """
+
     st.markdown(hero_html, unsafe_allow_html=True)
 
     # --- BARRA DI NAVIGAZIONE SUPERIORE (TASTO CAMBIO LINGUA) ---
