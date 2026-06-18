@@ -11,7 +11,7 @@ def invia_email_contatto(nome, email, telefono, budget, tempistica, messaggio):
     destinatari = [
         "magostinienrico@gmail.com",
         "marco.ridolfi@hotmail.com",
-        "gfc"
+        "gianfranco.caroni@gmail.com"
     ]
   
     SMTP_SERVER = "smtp.gmail.com"
@@ -592,6 +592,10 @@ def inject_rtl_css():
 # ==========================================
 # RENDER DELLA SPLASH PAGE (SELEZIONE LINGUA)
 # ==========================================
+# ==========================================
+# RENDER DELLA SPLASH PAGE (SELEZIONE LINGUA)
+# ==========================================
+def render_splash_page():
     # --- PRIMA FILA (3 Pulsanti) ---
     # [1.5, 2, 2, 2, 1.5] allarga leggermente i margini laterali per bilanciare 3 colonne
     _, col1, col2, col3, _ = st.columns([1.5, 2, 2, 2, 1.5])
