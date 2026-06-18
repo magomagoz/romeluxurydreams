@@ -385,7 +385,7 @@ def inject_custom_css():
             border-radius: 16px; padding: 2.5rem 2rem; backdrop-filter: blur(6px); border: 1px solid rgba(255, 255, 255, 0.03);
         }
         .hero-logo-top-container { width: clamp(100px, 20vw, 130px); margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center; }
-        .hero-logo-graphic { width: 100%; filter: drop-shadow(0px 4px 12px rgba(212, 175, 55, 0.3)); }
+        .hero-logo-graphic { width: 150%; filter: drop-shadow(0px 4px 12px rgba(212, 175, 55, 0.3)); }
         .hero-brand-text { font-size: clamp(0.9rem, 2vw, 1.1rem); color: var(--gold-accent); text-transform: uppercase; letter-spacing: 6px; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 0.5rem; }
         .hero-title { color: #FFFFFF; font-size: clamp(1.8rem, 4.5vw, 3.2rem); font-weight: 300; letter-spacing: 1px; line-height: 1.3; margin-bottom: 1.5rem; text-shadow: 0 4px 15px rgba(0,0,0,0.8); }
         .hero-subtitle { color: var(--text-muted); font-size: clamp(1rem, 2.2vw, 1.3rem); font-weight: 300; line-height: 1.6; max-width: 750px; margin: 0 auto; }
