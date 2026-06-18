@@ -540,25 +540,40 @@ def inject_rtl_css():
 def render_splash_page():
     logo_src = get_base64_of_image("logo.png")
     
+    # Intestazione con Logo e Titolo
     st.markdown(f"""
         <div class="splash-container">
             <img src="{logo_src}" class="splash-logo" alt="Rome Luxury Dreams">
-            <h3 style="color: var(--text-muted); font-weight: 300; letter-spacing: 2px; margin-bottom: 2.5rem; text-transform: uppercase;">
-                Select your language
-            </h3>
+            <h3>Select your language</h3>
         </div>
     """, unsafe_allow_html=True)
     
-    spacer_left, main_col, spacer_right = st.columns([1, 4, 1])
+    # --- PRIMA FILA (4 Pulsanti) ---
+    # [1, 2, 2, 2, 2, 1] crea due spazi vuoti ai lati (1) e 4 colonne uguali al centro (2) per bilanciare il layout
+    _, col1, col2, col3, col4, _ = st.columns([1, 2, 2, 2, 2, 1])
     
-    with main_col:
+    with col1:
         st.button("🇮🇹 Italiano", on_click=set_language, args=('it',), use_container_width=True)
+    with col2:
         st.button("🇬🇧 English", on_click=set_language, args=('en',), use_container_width=True)
+    with col3:
         st.button("🇫🇷 Français", on_click=set_language, args=('fr',), use_container_width=True)
+    with col4:
         st.button("🇪🇸 Español", on_click=set_language, args=('es',), use_container_width=True)
+        
+    # Aggiunge un piccolissimo spazio verticale tra le due file
+    st.markdown("<div style='margin-top: 10px;'></div>", unsafe_allow_html=True)
+        
+    # --- SECONDA FILA (4 Pulsanti) ---
+    _, col5, col6, col7, col8, _ = st.columns([1, 2, 2, 2, 2, 1])
+    
+    with col5:
         st.button("🇩🇪 Deutsch", on_click=set_language, args=('de',), use_container_width=True)
+    with col6:
         st.button("🇷🇺 Русский", on_click=set_language, args=('ru',), use_container_width=True)
+    with col7:
         st.button("🇦🇪 العربية", on_click=set_language, args=('ar',), use_container_width=True)
+    with col8:
         st.button("🇨🇳 中文 (简体)", on_click=set_language, args=('zh',), use_container_width=True)
 
 def render_main_site(lang_dict, is_rtl=False):
