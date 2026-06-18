@@ -688,8 +688,7 @@ def render_main_site(lang_dict, is_rtl=False):
     """Rende l'intero sito web utilizzando il dizionario della lingua scelta."""
     logo_src = get_base64_of_image("logo.png")
     
-    # --- NUOVA HERO SECTION CON VIDEO ---
-    # 1. URL Ottimizzato
+    # URL Ottimizzato (corretto)
     video_url = "https://res.cloudinary.com/dcbyxecy4/video/upload/w_1280,q_auto,f_auto/Video_vtviy5.mp4" 
 
     hero_html = f"""
@@ -703,13 +702,12 @@ def render_main_site(lang_dict, is_rtl=False):
             <div class="hero-logo-top-container">
                 <img src="{logo_src}" alt="Logo" class="hero-logo-graphic">
             </div>
-            <div class="hero-brand-text">{{lang_dict['brand']}}</div>
-            <h1 class="hero-title">{{lang_dict['hero_title']}}</h1>
-            <p class="hero-subtitle">{{lang_dict['hero_subtitle']}}</p>
+            <div class="hero-brand-text">{lang_dict['brand']}</div>
+            <h1 class="hero-title">{lang_dict['hero_title']}</h1>
+            <p class="hero-subtitle">{lang_dict['hero_subtitle']}</p>
         </div>
     </div>
     """
-
     st.markdown(hero_html, unsafe_allow_html=True)
 
     # --- BARRA DI NAVIGAZIONE SUPERIORE (TASTO CAMBIO LINGUA) ---
