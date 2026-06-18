@@ -556,8 +556,8 @@ def render_splash_page():
         st.button("🇬🇧 English", on_click=set_language, args=('en',), use_container_width=True)
         st.button("🇫🇷 Français", on_click=set_language, args=('fr',), use_container_width=True)
         st.button("🇪🇸 Español", on_click=set_language, args=('es',), use_container_width=True)
-        st.button("🇩🇪 Deutsch", on_click=set_language, args=('en',), use_container_width=True)
-        st.button("🇷🇺 Русский", on_click=set_language, args=('en',), use_container_width=True)
+        st.button("🇩🇪 Deutsch", on_click=set_language, args=('de',), use_container_width=True)
+        st.button("🇷🇺 Русский", on_click=set_language, args=(ru',), use_container_width=True)
         st.button("🇦🇪 العربية", on_click=set_language, args=('ar',), use_container_width=True)
         st.button("🇨🇳 中文 (简体)", on_click=set_language, args=('zh',), use_container_width=True)
 
