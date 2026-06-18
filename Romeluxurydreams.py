@@ -562,7 +562,7 @@ def render_splash_page():
         st.button("🇪🇸 Español", on_click=set_language, args=('es',), use_container_width=True)
         
     # Aggiunge un piccolissimo spazio verticale tra le due file
-    st.markdown("<div style='margin-top: 5px;'></div>", unsafe_allow_html=True)
+    #st.markdown("<div style='margin-top: 10px;'></div>", unsafe_allow_html=True)
         
     # --- SECONDA FILA (4 Pulsanti) ---
     _, col5, col6, col7, col8, _ = st.columns([1, 2, 2, 2, 2, 1])
