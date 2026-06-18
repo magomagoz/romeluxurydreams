@@ -291,6 +291,9 @@ def set_language(lang):
     """Callback per impostare la lingua al click del bottone"""
     st.session_state.language = lang
 
+def reset_language():
+    st.session_state.language = None
+
 # ==========================================
 # FUNZIONE HELPER PER IMMAGINI LOCALI
 # ==========================================
@@ -334,6 +337,23 @@ def inject_custom_css():
         div.stButton {
             margin-bottom: 1.2rem;
             width: 100%;
+        }
+
+        /* Stile Tasto Cambio Lingua (Top Right) */
+        .lang-switch-container div.stButton > button {
+            background-color: rgba(28, 37, 65, 0.6);
+            color: var(--text-muted);
+            border: 1px solid rgba(161, 169, 206, 0.3);
+            border-radius: 20px;
+            padding: 6px 16px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+        .lang-switch-container div.stButton > button:hover {
+            color: var(--gold-accent);
+            border-color: var(--gold-accent);
+            background-color: rgba(28, 37, 65, 0.9);
         }
         
         /* Hero Section */
@@ -423,6 +443,20 @@ def render_splash_page():
 def render_main_site(lang_dict):
     """Rende l'intero sito web utilizzando il dizionario della lingua scelta."""
     logo_src = get_base64_of_image("logo.png")
+
+    # --- BARRA DI NAVIGAZIONE SUPERIORE (TASTO CAMBIO LINGUA) ---
+    st.markdown('<div class="lang-switch-container">', unsafe_allow_html=True)
+    if is_rtl:
+        # Se è Arabo (RTL), allinea il tasto a sinistra
+        btn_col, spacer_col = st.columns([1, 4])
+        with btn_col:
+            st.button(lang_dict['back_btn'], on_click=reset_language, use_container_width=True)
+    else:
+        # Altrimenti allinealo a destra
+        spacer_col, btn_col = st.columns([4, 1])
+        with btn_col:
+            st.button(lang_dict['back_btn'], on_click=reset_language, use_container_width=True)
+    st.markdown('</div>', unsafe_allow_html=True)
     
     # --- HERO SECTION ---
     hero_html = f"""
