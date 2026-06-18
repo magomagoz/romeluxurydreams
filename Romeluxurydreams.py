@@ -395,7 +395,7 @@ def inject_custom_css():
         .luxury-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.4); border-left-width: 6px; }
         .card-title { color: var(--gold-accent); font-size: 1.2rem; font-weight: bold; margin-bottom: 1rem; }
         .card-text { color: var(--text-muted); font-size: 1rem; line-height: 1.5; }
-        .section-header { color: var(--gold-accent); font-size: 2.2rem; text-align: center; margin-top: 3rem; margin-bottom: 2.5rem; font-weight: 300; text-transform: uppercase; letter-spacing: 2px; }
+        .section-header { color: var(--gold-accent); font-size: 2.2rem; text-align: center; margin-top: 1rem; margin-bottom: 1rem; font-weight: 300; text-transform: uppercase; letter-spacing: 2px; }
         .stMarkdown hr { border: 0; border-top: 1px solid rgba(212, 175, 55, 0.2); margin: 4rem 0; }
         
         /* Stile per i bottoni della lingua */
