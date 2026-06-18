@@ -371,7 +371,7 @@ def inject_custom_css():
         
         .hero-wrapper {
             position: relative; width: 100%; height: auto; min-height: 520px; border-radius: 12px; overflow: hidden;
-            display: flex; align-items: center; justify-content: center; margin-top: 1rem; margin-bottom: 2rem;
+            display: flex; align-items: center; justify-content: center; margin-top: 1rem; margin-bottom: 4rem;
             box-shadow: 0 20px 50px rgba(0,0,0,0.6); border: 1px solid rgba(212, 175, 55, 0.15); padding: 3rem 1.5rem;
         }
         .hero-bg {
@@ -395,7 +395,7 @@ def inject_custom_css():
         .luxury-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.4); border-left-width: 6px; }
         .card-title { color: var(--gold-accent); font-size: 1.2rem; font-weight: bold; margin-bottom: 1rem; }
         .card-text { color: var(--text-muted); font-size: 1rem; line-height: 1.5; }
-        .section-header { color: var(--gold-accent); font-size: 2.2rem; text-align: center; margin-top: 1rem; margin-bottom: 1rem; font-weight: 300; text-transform: uppercase; letter-spacing: 2px; }
+        .section-header { color: var(--gold-accent); font-size: 2.2rem; text-align: center; margin-top: 3rem; margin-bottom: 2.5rem; font-weight: 300; text-transform: uppercase; letter-spacing: 2px; }
         .stMarkdown hr { border: 0; border-top: 1px solid rgba(212, 175, 55, 0.2); margin: 4rem 0; }
         
         /* Stile per i bottoni della lingua */
