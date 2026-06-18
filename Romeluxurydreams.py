@@ -526,20 +526,62 @@ def inject_custom_css():
         @keyframes fadeInUp { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
         
         .hero-wrapper {
-            position: relative; width: 100%; height: auto; min-height: 520px; border-radius: 12px; overflow: hidden;
-            display: flex; align-items: center; justify-content: center; margin-top: 1rem; margin-bottom: 2rem;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6); border: 1px solid rgba(212, 175, 55, 0.15); padding: 3rem 1.5rem;
+            position: relative; 
+            width: 100%; 
+            min-height: 520px; 
+            border-radius: 12px; 
+            overflow: hidden;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            margin-top: 1rem; 
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6); 
+            border: 1px solid rgba(212, 175, 55, 0.15); 
+            padding: 3rem 1.5rem;
         }
-        .hero-bg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(180deg, rgba(11,19,43,0.65) 0%, rgba(11,19,43,0.98) 100%), url('https://images.unsplash.com/photo-1552832230-c0197dd311b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover; background-position: center center; animation: slowZoom 20s infinite alternate ease-in-out; z-index: 1;
+    
+        /* IL VIDEO DI SFONDO */
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Si comporta come 'background-size: cover' */
+            z-index: 1;
+            opacity: 0.5; /* Trasparenza al 50% */
         }
+    
+        /* L'OVERLAY SCURO (Serve a garantire il contrasto con i testi bianchi) */
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(11,19,43,0.5) 0%, rgba(11,19,43,0.95) 100%);
+            z-index: 2; /* Sopra il video, sotto i testi */
+        }
+    
+        /* IL CONTENUTO (Logo, Titolo, Sottotitolo) */
         .hero-content {
-            position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center;
-            max-width: 950px; width: 100%; animation: fadeInUp 1.2s ease-out; background: rgba(11, 19, 43, 0.4);
-            border-radius: 16px; padding: 2.5rem 2rem; backdrop-filter: blur(6px); border: 1px solid rgba(255, 255, 255, 0.03);
+            position: relative; 
+            z-index: 3; /* Sopra a tutto per rimanere leggibile e cliccabile */
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            text-align: center;
+            max-width: 950px; 
+            width: 100%; 
+            animation: fadeInUp 1.2s ease-out; 
+            background: rgba(11, 19, 43, 0.3);
+            border-radius: 16px; 
+            padding: 2.5rem 2rem; 
+            backdrop-filter: blur(4px); 
+            border: 1px solid rgba(255, 255, 255, 0.03);
         }
+        
         .hero-logo-top-container { width: clamp(100px, 20vw, 130px); margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center; }
         .hero-logo-graphic { width: 100%; filter: drop-shadow(0px 4px 12px rgba(212, 175, 55, 0.3)); }
         .hero-brand-text { font-size: clamp(0.9rem, 2vw, 1.1rem); color: var(--gold-accent); text-transform: uppercase; letter-spacing: 6px; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 0.5rem; }
@@ -642,14 +684,22 @@ def render_splash_page():
 def render_main_site(lang_dict, is_rtl=False):
     """Rende l'intero sito web utilizzando il dizionario della lingua scelta."""
     logo_src = get_base64_of_image("logo.png")
-    dir_attr = 'dir="rtl"' if is_rtl else ''
+    
+    # Inserisci qui l'URL diretto del tuo video MP4
+    video_url = "https://tuodominio.com/video_background.mp4" 
 
-    # --- HERO SECTION ---
+    # --- NUOVA HERO SECTION CON VIDEO ---
     hero_html = f"""
     <div class="hero-wrapper">
-        <div class="hero-bg"></div>
+        <video autoplay loop muted playsinline class="hero-video">
+            <source src="{video_url}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-overlay"></div>
         <div class="hero-content">
-            <div class="hero-logo-top-container"><img src="{logo_src}" alt="Rome Luxury Dreams Logo" class="hero-logo-graphic"></div>
+            <div class="hero-logo-top-container">
+                <img src="{logo_src}" alt="Logo" class="hero-logo-graphic">
+            </div>
             <div class="hero-brand-text">{lang_dict['brand']}</div>
             <h1 class="hero-title">{lang_dict['hero_title']}</h1>
             <p class="hero-subtitle">{lang_dict['hero_subtitle']}</p>
