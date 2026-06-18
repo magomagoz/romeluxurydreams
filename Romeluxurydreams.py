@@ -689,12 +689,12 @@ def render_main_site(lang_dict, is_rtl=False):
     logo_src = get_base64_of_image("logo.png")
     
     # Inserisci qui l'URL diretto del tuo video MP4
-    video_url = "https://res.cloudinary.com/dcbyxecy4/video/upload/Video_vtviy5.mp4"
+    video_url = "https://res.cloudinary.com/dcbyxecy4/video/upload/w_1280,q_auto,f_auto/Video_vtviy5.mp4"
 
     # --- NUOVA HERO SECTION CON VIDEO ---
     hero_html = f"""
     <div class="hero-wrapper">
-        <video autoplay loop muted playsinline class="hero-video">
+        <video autoplay loop muted playsinline preload="auto" class="hero-video">
             <source src="{video_url}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
