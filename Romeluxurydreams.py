@@ -47,7 +47,8 @@ TRANSLATIONS = {
         "form_msg": "Esigenze Particolari (es. Terrazza, Ascensore, Box auto)",
         "form_btn": "Invia Richiesta Riservata",
         "form_success": "Grazie {name}. La tua richiesta è stata recepita in totale riservatezza.",
-        "form_error": "Per favore, compila i campi obbligatori."
+        "form_error": "Per favore, compila i campi obbligatori.",
+        "back_btn": "🔙 Cambia Lingua"
     },
     "en": {
         "brand": "Rome Luxury Dreams",
@@ -80,7 +81,8 @@ TRANSLATIONS = {
         "form_msg": "Specific Requirements (e.g., Terrace, Elevator, Garage)",
         "form_btn": "Send Confidential Request",
         "form_success": "Thank you {name}. Your request has been received with total confidentiality.",
-        "form_error": "Please fill in the required fields."
+        "form_error": "Please fill in the required fields.",
+        "back_btn": "🔙 Change Language"
     },
     "fr": {
         "brand": "Rome Luxury Dreams",
@@ -113,7 +115,8 @@ TRANSLATIONS = {
         "form_msg": "Besoins Particuliers (ex. Terrasse, Ascenseur, Garage)",
         "form_btn": "Envoyer une Demande Confidentielle",
         "form_success": "Merci {name}. Votre demande a été reçue en toute confidentialité.",
-        "form_error": "Veuillez remplir les champs obligatoires."
+        "form_error": "Veuillez remplir les champs obligatoires.",
+        "back_btn": "🔙 Changer de Langue"
     },
     "es": {
         "brand": "Rome Luxury Dreams",
@@ -146,7 +149,8 @@ TRANSLATIONS = {
         "form_msg": "Requisitos Específicos (ej. Terraza, Ascensor, Garaje)",
         "form_btn": "Enviar Solicitud Confidencial",
         "form_success": "Gracias {name}. Su solicitud ha sido recibida con total confidencialidad.",
-        "form_error": "Por favor, complete los campos obligatorios."
+        "form_error": "Por favor, complete los campos obligatorios.",
+        "back_btn": "🔙 Cambiar Idioma"
     },
     "de": {
         "brand": "Rome Luxury Dreams",
@@ -179,7 +183,8 @@ TRANSLATIONS = {
         "form_msg": "Besondere Anforderungen (z.B. Terrasse, Aufzug, Garage)",
         "form_btn": "Vertrauliche Anfrage senden",
         "form_success": "Vielen Dank, {name}. Ihre Anfrage wurde streng vertraulich entgegengenommen.",
-        "form_error": "Bitte füllen Sie die Pflichtfelder aus."
+        "form_error": "Bitte füllen Sie die Pflichtfelder aus.",
+        "back_btn": "🔙 Sprache Ändern"
     },
     "ru": {
         "brand": "Rome Luxury Dreams",
@@ -212,7 +217,8 @@ TRANSLATIONS = {
         "form_msg": "Особые Пожелания (например, терраса, лифт, гараж)",
         "form_btn": "Отправить Конфиденциальный Запрос",
         "form_success": "Спасибо, {name}. Ваш запрос получен с соблюдением полной конфиденциальности.",
-        "form_error": "Пожалуйста, заполните обязательные поля."
+        "form_error": "Пожалуйста, заполните обязательные поля.",
+        "back_btn": "🔙 Изменить Язык"
     },
     "ar": {
             "brand": "Rome Luxury Dreams",
@@ -245,7 +251,8 @@ TRANSLATIONS = {
             "form_msg": "متطلبات خاصة (مثل: شرفة، مصعد، مرآب سيارات)",
             "form_btn": "إرسال طلب سري",
             "form_success": "شكرًا لك {name}. تم استلام طلبك بسرية تامة.",
-            "form_error": "يرجى ملء الحقول المطلوبة."
+            "form_error": "يرجى ملء الحقول المطلوبة.",
+            "back_btn": "تغيير اللغة 🔙"
         },
        "zh": {
             "brand": "Rome Luxury Dreams",
@@ -278,7 +285,8 @@ TRANSLATIONS = {
             "form_msg": "特殊需求(例如:露台、电梯、专属车库等)",
             "form_btn": "发送保密申请",
             "form_success": "谢谢您 {name}。您的私人申请已在绝对保密的情况下妥善收到。",
-            "form_error": "请填写必填项。"
+            "form_error": "请填写必填项。",
+            "back_btn": "🔙 更改语言"
         }
     }
 # ==========================================
@@ -307,6 +315,7 @@ def get_base64_of_image(image_path):
 # ==========================================
 # STILI CSS CUSTOM
 # ==========================================
+
 def inject_custom_css():
     custom_css = """
     <style>
@@ -409,6 +418,20 @@ def inject_custom_css():
     </style>
     """
     st.markdown(custom_css, unsafe_allow_html=True)
+
+def inject_rtl_css():
+rtl_css = """
+<style>
+    .stApp {
+        direction: rtl;
+        text-align: right;
+    }
+    /* Assicura che le liste e i form siano allineati correttamente a destra */
+    ul { padding-right: 1.2rem; padding-left: 0; }
+    .stTextInput > div > div > input, .stTextArea > div > div > textarea { text-align: right; }
+</style>
+"""
+st.markdown(rtl_css, unsafe_allow_html=True)
 
 # ==========================================
 # RENDER DELLA SPLASH PAGE (SELEZIONE LINGUA)
