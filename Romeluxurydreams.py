@@ -381,7 +381,7 @@ def inject_custom_css():
         
         .hero-wrapper {
             position: relative; width: 100%; height: auto; min-height: 520px; border-radius: 12px; overflow: hidden;
-            display: flex; align-items: center; justify-content: center; margin-top: 1rem; margin-bottom: 4rem;
+            display: flex; align-items: center; justify-content: center; margin-top: 1rem; margin-bottom: 2rem;
             box-shadow: 0 20px 50px rgba(0,0,0,0.6); border: 1px solid rgba(212, 175, 55, 0.15); padding: 3rem 1.5rem;
         }
         .hero-bg {
