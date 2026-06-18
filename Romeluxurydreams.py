@@ -567,7 +567,7 @@ def inject_custom_css():
         /* IL CONTENUTO (Logo, Titolo, Sottotitolo) */
         .hero-content {
             position: relative; 
-            z-index: 3; /* Sopra a tutto per rimanere leggibile e cliccabile */
+            z-index: 3; 
             display: flex; 
             flex-direction: column; 
             align-items: center; 
@@ -575,11 +575,14 @@ def inject_custom_css():
             max-width: 950px; 
             width: 100%; 
             animation: fadeInUp 1.2s ease-out; 
-            background: rgba(11, 19, 43, 0.3);
+            
+            /* --- MODIFICHE QUI --- */
+            background: rgba(11, 19, 43, 0.15); /* Abbassato da 0.3 a 0.15 per renderlo più trasparente */
+            backdrop-filter: blur(2px); /* Abbassata la sfocatura da 6px a 2px per far intravedere meglio i dettagli del video */
+            
             border-radius: 16px; 
             padding: 2.5rem 2rem; 
-            backdrop-filter: blur(4px); 
-            border: 1px solid rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
         
         .hero-logo-top-container { width: clamp(100px, 20vw, 130px); margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center; }
