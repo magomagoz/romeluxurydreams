@@ -5,7 +5,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-def invia_email_contatto(nome, email, telefono, budget, messaggio):
+def invia_email_contatto(nome, email, telefono, budget, tempistica, messaggio):
     """Invia i dettagli del form compilato a tre caselle email contemporaneamente."""
     # Inserisci qui i tuoi tre indirizzi email di destinazione
     destinatari = [
@@ -13,8 +13,7 @@ def invia_email_contatto(nome, email, telefono, budget, messaggio):
         "marco.ridolfi@hotmail.com",
         "gfc"
     ]
-    
-    # Configurazione Server SMTP (Esempio per Gmail)
+  
     SMTP_SERVER = "smtp.gmail.com"
     SMTP_PORT = 587
     
@@ -22,20 +21,16 @@ def invia_email_contatto(nome, email, telefono, budget, messaggio):
         EMAIL_MITTENTE = st.secrets["SMTP_USER"]
         PASSWORD_MITTENTE = st.secrets["SMTP_PASSWORD"]
     except Exception:
-        # Messaggio di errore nei log se dimentichi di configurare st.secrets
         print("Errore: Credenziali SMTP non configurate in st.secrets")
         return False
 
-    # Creazione della mail
     msg = MIMEMultipart()
     msg['From'] = EMAIL_MITTENTE
     msg['To'] = ", ".join(destinatari)
     msg['Subject'] = f"✨ Lead: {nome} - Rome Luxury Dreams"
     
-    # Recuperiamo la lingua corrente per indicarla nella mail di notifica
     lingua_corrente = st.session_state.get('language', 'it').upper()
     
-    # Corpo del messaggio in formato HTML raffinato
     corpo_html = f"""
     <html>
         <body style="font-family: 'Helvetica Neue', Arial, sans-serif; color: #1c2541; line-height: 1.6; background-color: #f4f5f7; padding: 20px;">
@@ -63,6 +58,12 @@ def invia_email_contatto(nome, email, telefono, budget, messaggio):
                             <td style="padding: 8px 0; border-bottom: 1px solid #f0f1f3; color: #a1a9ce;">Budget indicato:</td>
                             <td style="padding: 8px 0; border-bottom: 1px solid #f0f1f3; color: #d4af37; font-weight: bold;">{budget}</td>
                         </tr>
+                        
+                        <tr>
+                            <td style="padding: 8px 0; border-bottom: 1px solid #f0f1f3; color: #a1a9ce;">Tempistica desiderata:</td>
+                            <td style="padding: 8px 0; border-bottom: 1px solid #f0f1f3; font-weight: bold; color: #0b132b;">{tempistica}</td>
+                        </tr>
+                        
                         <tr>
                             <td style="padding: 8px 0; color: #a1a9ce;">Lingua Navigazione:</td>
                             <td style="padding: 8px 0; font-weight: bold;">{lingua_corrente}</td>
@@ -91,6 +92,7 @@ def invia_email_contatto(nome, email, telefono, budget, messaggio):
     except Exception as e:
         print(f"Errore smtplib: {e}")
         return False
+
 
 
 # ==========================================
@@ -135,6 +137,8 @@ TRANSLATIONS = {
         "form_phone": "Recapito Telefonico",
         "form_budget_label": "Budget di Riferimento",
         "form_budget_opts": ["Seleziona il range d'investimento", "600.000 € - 1.000.000 €", "1.000.000 € - 2.000.000 €", "Oltre 2.000.000 €"],
+        "form_timeline_label": "Tempistica desiderata dell\'operazione",
+        "form_timeline_opts": ["Immediato", "3 mesi", "6 mesi", "1 anno"],
         "form_msg": "Esigenze Particolari (es. Terrazza, Ascensore, Box auto)",
         "form_btn": "Invia Richiesta Riservata",
         "form_success": "Grazie {name}. La tua richiesta è stata recepita in totale riservatezza.",
@@ -169,6 +173,8 @@ TRANSLATIONS = {
         "form_phone": "Phone Number",
         "form_budget_label": "Investment Range",
         "form_budget_opts": ["Select investment range", "€600,000 - €1,000,000", "€1,000,000 - €2,000,000", "Over €2,000,000"],
+        "form_timeline_label": "Desired execution timeline",
+        "form_timeline_opts": ["Immediate", "3 months", "6 months", "1 year"],
         "form_msg": "Specific Requirements (e.g., Terrace, Elevator, Garage)",
         "form_btn": "Send Confidential Request",
         "form_success": "Thank you {name}. Your request has been received with total confidentiality.",
@@ -203,6 +209,8 @@ TRANSLATIONS = {
         "form_phone": "Numéro de Téléphone",
         "form_budget_label": "Budget de Référence",
         "form_budget_opts": ["Sélectionnez la fourchette d'investissement", "600 000 € - 1 000 000 €", "1 000 000 € - 2 000 000 €", "Plus de 2 000 000 €"],
+        "form_timeline_label": "Délai souhaité pour l'opération",
+        "form_timeline_opts": ["Immédiat", "3 mois", "6 mois", "1 an"],
         "form_msg": "Besoins Particuliers (ex. Terrasse, Ascenseur, Garage)",
         "form_btn": "Envoyer une Demande Confidentielle",
         "form_success": "Merci {name}. Votre demande a été reçue en toute confidentialité.",
@@ -237,6 +245,8 @@ TRANSLATIONS = {
         "form_phone": "Número de Teléfono",
         "form_budget_label": "Presupuesto de Referencia",
         "form_budget_opts": ["Seleccione el rango de inversión", "600.000 € - 1.000.000 €", "1.000.000 € - 2.000.000 €", "Más de 2.000.000 €"],
+        "form_timeline_label": "Plazo deseado para la operación",
+        "form_timeline_opts": ["Inmediato", "3 meses", "6 meses", "1 año"],
         "form_msg": "Requisitos Específicos (ej. Terraza, Ascensor, Garaje)",
         "form_btn": "Enviar Solicitud Confidencial",
         "form_success": "Gracias {name}. Su solicitud ha sido recibida con total confidencialidad.",
@@ -271,6 +281,8 @@ TRANSLATIONS = {
         "form_phone": "Telefonnummer",
         "form_budget_label": "Investitionsrahmen",
         "form_budget_opts": ["Wählen Sie den Investitionsbereich", "600.000 € - 1.000.000 €", "1.000.000 € - 2.000.000 €", "Über 2.000.000 €"],
+        "form_timeline_label": "Gewünschter Zeitrahmen für das Vorhaben",
+        "form_timeline_opts": ["Sofort", "3 Monate", "6 Monate", "1 Jahr"],
         "form_msg": "Besondere Anforderungen (z.B. Terrasse, Aufzug, Garage)",
         "form_btn": "Vertrauliche Anfrage senden",
         "form_success": "Vielen Dank, {name}. Ihre Anfrage wurde streng vertraulich entgegengenommen.",
@@ -305,6 +317,8 @@ TRANSLATIONS = {
         "form_phone": "Номер телефона",
         "form_budget_label": "Инвестиционный Бюджет",
         "form_budget_opts": ["Выберите диапазон инвестиций", "600 000 € - 1 000 000 €", "1 000 000 € - 2 000 000 €", "Более 2 000 000 €"],
+        "form_timeline_label": "Желаемые сроки проведения операции",
+        "form_timeline_opts": ["Немедленно", "3 месяца", "6 месяцев", "1 год"],
         "form_msg": "Особые Пожелания (например, терраса, лифт, гараж)",
         "form_btn": "Отправить Конфиденциальный Запрос",
         "form_success": "Спасибо, {name}. Ваш запрос получен с соблюдением полной конфиденциальности.",
@@ -339,6 +353,8 @@ TRANSLATIONS = {
             "form_phone": "رقم الهاتف",
             "form_budget_label": "نطاق الاستثمار",
             "form_budget_opts": ["اختر نطاق الاستثمار", "600,000 يورو - 1,000,000 يورو", "1,000,000 يورو - 2,000,000 يورو", "أكثر من 2,000,000 يورو"],
+            "form_timeline_label": "الإطار الزمني المطلوب للعملية",
+            "form_timeline_opts": ["فوري", "3 أشهر", "6 أشهر", "سنة واحدة"],
             "form_msg": "متطلبات خاصة (مثل: شرفة، مصعد، مرآب سيارات)",
             "form_btn": "إرسال طلب سري",
             "form_success": "شكرًا لك {name}. تم استلام طلبك بسرية تامة.",
@@ -373,6 +389,8 @@ TRANSLATIONS = {
             "form_phone": "电话号码",
             "form_budget_label": "投资预算范围",
             "form_budget_opts": ["请选择投资范围", "600,000 欧元 - 1,000,000 欧元", "1,000,000 欧元 - 2,000,000 欧元", "2,000,000 欧元以上"],
+            "form_timeline_label": "预期的交易时间表",
+            "form_timeline_opts": ["立即", "3个月", "6个月", "1年"],
             "form_msg": "特殊需求(例如:露台、电梯、专属车库等)",
             "form_btn": "发送保密申请",
             "form_success": "谢谢您 {name}。您的私人申请已在绝对保密的情况下妥善收到。",
@@ -646,37 +664,37 @@ def render_main_site(lang_dict, is_rtl=False):
     spacer_left, form_col, spacer_right = st.columns([1, 2, 1])
     
     with form_col:
-        # Utilizziamo clear_on_submit=True per svuotare automaticamente il modulo dopo un invio riuscito
         with st.form(key="private_consultation_form", clear_on_submit=True):
             st.markdown(f"<p style='color: var(--text-muted); text-align: center;'>{lang_dict['contact_sub']}</p>", unsafe_allow_html=True)
             
-            # Campi del form originali legati al dizionario delle lingue
             client_name = st.text_input(lang_dict['form_name'])
             client_email = st.text_input(lang_dict['form_email'])
             client_phone = st.text_input(lang_dict['form_phone'])
             client_budget = st.selectbox(lang_dict['form_budget_label'], lang_dict['form_budget_opts'])
+            
+            # --- NUOVO CAMPO INSERITO SOTTO IL BUDGET ---
+            client_timeline = st.selectbox(lang_dict['form_timeline_label'], lang_dict['form_timeline_opts'])
+            
             client_message = st.text_area(lang_dict['form_msg'])
             
             submit_button = st.form_submit_button(label=lang_dict['form_btn'])
             
             if submit_button:
-                # Controllo validazione campi obbligatori (Nome ed Email)
                 if client_name.strip() and client_email.strip():
-                    
-                    # Mostra una ruota di caricamento durante l'invio SMTP
                     with st.spinner("Processing..."):
+                        # Abbiamo aggiunto client_timeline tra i parametri inviati
                         successo = invia_email_contatto(
                             nome=client_name,
                             email=client_email,
                             telefono=client_phone,
                             budget=client_budget,
+                            tempistica=client_timeline, # <-- Passato qui
                             messaggio=client_message
                         )
                     
                     if successo:
                         st.success(lang_dict['form_success'].format(name=client_name))
                     else:
-                        # Fallback se il server SMTP fallisce o le credenziali non sono corrette
                         st.error("Error sending message. Please try again later.")
                 else:
                     st.error(lang_dict['form_error'])
