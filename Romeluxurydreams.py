@@ -1,6 +1,97 @@
 import streamlit as st
 import base64
 import os
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
+def invia_email_contatto(nome, email, telefono, budget, messaggio):
+    """Invia i dettagli del form compilato a tre caselle email contemporaneamente."""
+    # Inserisci qui i tuoi tre indirizzi email di destinazione
+    destinatari = [
+        "magostinienrico@gmail.com",
+        "marco",
+        "gfc"
+    ]
+    
+    # Configurazione Server SMTP (Esempio per Gmail)
+    SMTP_SERVER = "smtp.gmail.com"
+    SMTP_PORT = 587
+    
+    try:
+        EMAIL_MITTENTE = st.secrets["SMTP_USER"]
+        PASSWORD_MITTENTE = st.secrets["SMTP_PASSWORD"]
+    except Exception:
+        # Messaggio di errore nei log se dimentichi di configurare st.secrets
+        print("Errore: Credenziali SMTP non configurate in st.secrets")
+        return False
+
+    # Creazione della mail
+    msg = MIMEMultipart()
+    msg['From'] = EMAIL_MITTENTE
+    msg['To'] = ", ".join(destinatari)
+    msg['Subject'] = f"✨ Lead: {nome} - Rome Luxury Dreams"
+    
+    # Recuperiamo la lingua corrente per indicarla nella mail di notifica
+    lingua_corrente = st.session_state.get('language', 'it').upper()
+    
+    # Corpo del messaggio in formato HTML raffinato
+    corpo_html = f"""
+    <html>
+        <body style="font-family: 'Helvetica Neue', Arial, sans-serif; color: #1c2541; line-height: 1.6; background-color: #f4f5f7; padding: 20px;">
+            <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #e1e4e8;">
+                <div style="background-color: #0b132b; padding: 25px; text-align: center; border-bottom: 3px solid #d4af37;">
+                    <h2 style="color: #ffffff; margin: 0; font-weight: 300; letter-spacing: 2px;">ROME LUXURY DREAMS</h2>
+                    <p style="color: #d4af37; margin: 5px 0 0 0; font-size: 0.9rem; letter-spacing: 1px;">Nuova Richiesta di Consulenza Riservata</p>
+                </div>
+                <div style="padding: 30px;">
+                    <p style="margin-top: 0;"><b>Dettagli dell'investitore:</b></p>
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr>
+                            <td style="padding: 8px 0; border-bottom: 1px solid #f0f1f3; color: #a1a9ce; width: 35%;">Nome e Cognome:</td>
+                            <td style="padding: 8px 0; border-bottom: 1px solid #f0f1f3; font-weight: bold;">{nome}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 0; border-bottom: 1px solid #f0f1f3; color: #a1a9ce;">Email:</td>
+                            <td style="padding: 8px 0; border-bottom: 1px solid #f0f1f3;"><a href="mailto:{email}" style="color: #d4af37; text-decoration: none;">{email}</a></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 0; border-bottom: 1px solid #f0f1f3; color: #a1a9ce;">Telefono:</td>
+                            <td style="padding: 8px 0; border-bottom: 1px solid #f0f1f3;">{telefono if telefono else 'Non fornito'}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 0; border-bottom: 1px solid #f0f1f3; color: #a1a9ce;">Budget indicato:</td>
+                            <td style="padding: 8px 0; border-bottom: 1px solid #f0f1f3; color: #d4af37; font-weight: bold;">{budget}</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 0; color: #a1a9ce;">Lingua Navigazione:</td>
+                            <td style="padding: 8px 0; font-weight: bold;">{lingua_corrente}</td>
+                        </tr>
+                    </table>
+                    
+                    <p style="margin-top: 25px; margin-bottom: 10px;"><b>Esigenze Particolari & Messaggio:</b></p>
+                    <div style="background-color: #f8f9fa; padding: 15px; border-left: 3px solid #d4af37; font-style: italic; border-radius: 4px; color: #1c2541;">
+                        {messaggio if messaggio else '-'}
+                    </div>
+                </div>
+            </div>
+        </body>
+    </html>
+    """
+    
+    msg.attach(MIMEText(corpo_html, 'html'))
+    
+    try:
+        server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+        server.starttls()
+        server.login(EMAIL_MITTENTE, PASSWORD_MITTENTE)
+        server.sendmail(EMAIL_MITTENTE, destinatari, msg.as_string())
+        server.quit()
+        return True
+    except Exception as e:
+        print(f"Errore smtplib: {e}")
+        return False
+
 
 # ==========================================
 # CONFIGURAZIONE PAGINA
@@ -538,9 +629,13 @@ def render_main_site(lang_dict, is_rtl=False):
     # --- CONTACT SECTION ---
     st.markdown(f"<h2 class='section-header'>{lang_dict['contact_header']}</h2>", unsafe_allow_html=True)
     spacer_left, form_col, spacer_right = st.columns([1, 2, 1])
+    
     with form_col:
-        with st.form(key="private_consultation_form"):
+        # Utilizziamo clear_on_submit=True per svuotare automaticamente il modulo dopo un invio riuscito
+        with st.form(key="private_consultation_form", clear_on_submit=True):
             st.markdown(f"<p style='color: var(--text-muted); text-align: center;'>{lang_dict['contact_sub']}</p>", unsafe_allow_html=True)
+            
+            # Campi del form originali legati al dizionario delle lingue
             client_name = st.text_input(lang_dict['form_name'])
             client_email = st.text_input(lang_dict['form_email'])
             client_phone = st.text_input(lang_dict['form_phone'])
@@ -548,9 +643,26 @@ def render_main_site(lang_dict, is_rtl=False):
             client_message = st.text_area(lang_dict['form_msg'])
             
             submit_button = st.form_submit_button(label=lang_dict['form_btn'])
+            
             if submit_button:
-                if client_name and client_email:
-                    st.success(lang_dict['form_success'].format(name=client_name))
+                # Controllo validazione campi obbligatori (Nome ed Email)
+                if client_name.strip() and client_email.strip():
+                    
+                    # Mostra una ruota di caricamento durante l'invio SMTP
+                    with st.spinner("Processing..."):
+                        successo = invia_email_contatto(
+                            nome=client_name,
+                            email=client_email,
+                            telefono=client_phone,
+                            budget=client_budget,
+                            messaggio=client_message
+                        )
+                    
+                    if successo:
+                        st.success(lang_dict['form_success'].format(name=client_name))
+                    else:
+                        # Fallback se il server SMTP fallisce o le credenziali non sono corrette
+                        st.error("Error sending message. Please try again later.")
                 else:
                     st.error(lang_dict['form_error'])
 
