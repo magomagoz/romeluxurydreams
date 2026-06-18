@@ -247,8 +247,40 @@ TRANSLATIONS = {
             "form_success": "شكرًا لك {name}. تم استلام طلبك بسرية تامة.",
             "form_error": "يرجى ملء الحقول المطلوبة."
         }
+       "zh": {
+            "brand": "Rome Luxury Dreams",
+            "hero_title": "开启永恒之城独家豪宅的钥匙",
+            "hero_subtitle": "非公开市场房源检索、机密谈判,以及优先进入罗马最尊贵房地产组合的特权。",
+            "services_header": "专职寻房服务 (Property Finder)",
+            "srv1_title": "🔍 非公开市场搜索",
+            "srv1_desc": "获取传统渠道未公开发布的隐形房源组合,确保绝对的独特性与私密性。",
+            "srv2_title": "🤝 机密谈判",
+            "srv2_desc": "在高度保密的情况下进行商务谈判,以确切保护投资者的身份及财务利益。",
+            "srv3_title": "🏛️ 建筑与历史分析",
+            "srv3_desc": "对历史建筑限制、建筑分层以及古董豪宅的保护状态进行极其严格的专业评估。",
+            "srv4_title": "🗝️ 一站式全包服务",
+            "srv4_desc": "从精准房源定位到法律、公证、税务支持以及高端室内设计等方面的全方位协助。",
+            "expertise_header": "罗马专业底蕴",
+            "exp_sub": "超越传统中介的边界",
+            "exp_text": "了解罗马豪华房产的价值,远不止于简单的每平方米价格评估。它需要对罗马的历史城市肌理有百科全书般的深刻认知。<br><br>从古老的奥勒良城墙到俯瞰巴洛克广场的贵族宫殿。我们甄选的住宅不仅是居住空间,更是首都建筑历史上真正的璀璨碎片。",
+            "exp_list_title": "我们的核心目标街区",
+            "exp_l1": "<b style='color: var(--gold-accent)'>历史中心 (Centro Storico):</b> 特里登特、纳沃纳广场、万神殿。",
+            "exp_l2": "<b style='color: var(--gold-accent)'>帕里奥利与平恰诺 (Parioli & Pinciano):</b> 传统经典高尚住宅区,尽显优雅。",
+            "exp_l3": "<b style='color: var(--gold-accent)'>阿文提诺 (Aventino):</b> 距离大竞技场仅一步之遥的都会宁静绿洲。",
+            "exp_l4": "<b style='color: var(--gold-accent)'>特拉斯提弗列与贾尼科洛 (Trastevere & Gianicolo):</b> 波西米亚魅力与俯瞰全城的绝佳视野。",
+            "contact_header": "索取私人尊享咨询",
+            "contact_sub": "请留下您的联系方式,我们将以极高的保密性与您取得联系。",
+            "form_name": "姓名 *",
+            "form_email": "电子邮箱 *",
+            "form_phone": "电话号码",
+            "form_budget_label": "投资预算范围",
+            "form_budget_opts": ["请选择投资范围", "600,000 欧元 - 1,000,000 欧元", "1,000,000 欧元 - 2,000,000 欧元", "2,000,000 欧元以上"],
+            "form_msg": "特殊需求(例如:露台、电梯、专属车库等)",
+            "form_btn": "发送保密申请",
+            "form_success": "谢谢您 {name}。您的私人申请已在绝对保密的情况下妥善收到。",
+            "form_error": "请填写必填项。"
+        }
     }
-
 # ==========================================
 # INIZIALIZZAZIONE STATO (LINGUA)
 # ==========================================
@@ -364,32 +396,26 @@ def inject_custom_css():
 def render_splash_page():
     logo_src = get_base64_of_image("logo.png")
     
-    # HTML per centrare verticalmente e mostrare il logo grande
     st.markdown(f"""
         <div class="splash-container">
             <img src="{logo_src}" class="splash-logo" alt="Rome Luxury Dreams">
-            <h2 style="color: var(--text-muted); font-weight: 300; letter-spacing: 3px; margin-bottom: 3rem;">SELECT YOUR LANGUAGE</h2>
+            <h3 style="color: var(--text-muted); font-weight: 300; letter-spacing: 2px; margin-bottom: 2.5rem; text-transform: uppercase;">
+                Select your language
+            </h3>
         </div>
     """, unsafe_allow_html=True)
     
-    # Due colonne centrate per i pulsanti
-    col1, col2, col3, col4, col5, col6, col7, col8 = st.columns([1, 1, 1, 1, 1, 1, 1, 1])
-    with col1:
-        st.button("🇮🇹 Italiano", on_click=set_language, args=('it',))
-    with col2:
-        st.button("🇬🇧 English", on_click=set_language, args=('en',))
-    with col3:
-        st.button("🇬🇧 French", on_click=set_language, args=('fr',))
-    with col4:
-        st.button("🇬🇧 Spanish", on_click=set_language, args=('es',))
-    with col5:
-        st.button("🇬🇧 Deutsch", on_click=set_language, args=('de',))
-    with col6:
-        st.button("🇬🇧 English", on_click=set_language, args=('ru',))
-    with col7:
-        st.button("🇬🇧 English", on_click=set_language, args=('ar',))
-    with col8:
-        st.button("🇬🇧 English", on_click=set_language, args=('',))
+    spacer_left, main_col, spacer_right = st.columns([1, 4, 1])
+    
+    with main_col:
+        st.button("🇮🇹 Italiano", on_click=set_language, args=('it',), use_container_width=True)
+        st.button("🇬🇧 English", on_click=set_language, args=('en',), use_container_width=True)
+        st.button("🇫🇷 Français", on_click=set_language, args=('fr',), use_container_width=True)
+        st.button("🇪🇸 Español", on_click=set_language, args=('es',), use_container_width=True)
+        st.button("🇩🇪 Deutsch", on_click=set_language, args=('en',), use_container_width=True)
+        st.button("🇷🇺 Русский", on_click=set_language, args=('en',), use_container_width=True)
+        st.button("🇦🇪 العربية", on_click=set_language, args=('ar',), use_container_width=True)
+        st.button("🇨🇳 中文 (简体)", on_click=set_language, args=('zh',), use_container_width=True)
 
 # ==========================================
 # RENDER DEL SITO PRINCIPALE
