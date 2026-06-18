@@ -437,12 +437,10 @@ def render_splash_page():
         st.button("🇦🇪 العربية", on_click=set_language, args=('ar',), use_container_width=True)
         st.button("🇨🇳 中文 (简体)", on_click=set_language, args=('zh',), use_container_width=True)
 
-# ==========================================
-# RENDER DEL SITO PRINCIPALE
-# ==========================================
-def render_main_site(lang_dict):
+def render_main_site(lang_dict, is_rtl=False):
     """Rende l'intero sito web utilizzando il dizionario della lingua scelta."""
     logo_src = get_base64_of_image("logo.png")
+    dir_attr = 'dir="rtl"' if is_rtl else ''
 
     # --- BARRA DI NAVIGAZIONE SUPERIORE (TASTO CAMBIO LINGUA) ---
     st.markdown('<div class="lang-switch-container">', unsafe_allow_html=True)
@@ -529,15 +527,17 @@ def render_main_site(lang_dict):
 def main():
     inject_custom_css()
     
-    # Se la lingua NON è stata scelta -> Mostra la Landing Page
+    if st.session_state.language == 'ar':
+        inject_rtl_css()
+    
     if st.session_state.language is None:
         render_splash_page()
-    
-    # Se la lingua è stata scelta -> Mostra il sito web intero
     else:
-        # Prendi il dizionario corretto in base alla lingua (it o en)
         current_lang_dict = TRANSLATIONS[st.session_state.language]
-        render_main_site(current_lang_dict)
+        # 1. Definiamo se la lingua corrente è RTL (Arabo)
+        is_rtl = (st.session_state.language == 'ar') 
+        # 2. Passiamo sia il dizionario sia la variabile is_rtl alla funzione
+        render_main_site(current_lang_dict, is_rtl=is_rtl) 
 
 if __name__ == "__main__":
     main()
