@@ -10,7 +10,7 @@ def invia_email_contatto(nome, email, telefono, budget, messaggio):
     # Inserisci qui i tuoi tre indirizzi email di destinazione
     destinatari = [
         "magostinienrico@gmail.com",
-        "marco",
+        "marco.ridolfi@hotmail.com",
         "gfc"
     ]
     
