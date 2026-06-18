@@ -246,7 +246,7 @@ TRANSLATIONS = {
             "form_btn": "إرسال طلب سري",
             "form_success": "شكرًا لك {name}. تم استلام طلبك بسرية تامة.",
             "form_error": "يرجى ملء الحقول المطلوبة."
-        }
+        },
        "zh": {
             "brand": "Rome Luxury Dreams",
             "hero_title": "开启永恒之城独家豪宅的钥匙",
