@@ -341,7 +341,7 @@ def inject_custom_css():
             animation: fadeInUp 1.2s ease-out;
         }
 
-        .splash-logo { width: clamp(325px, 40vw, 330px); margin-bottom: 6rem; filter: drop-shadow(0px 4px 15px rgba(212, 175, 55, 0.4)); }
+        .splash-logo { width: clamp(325px, 40vw, 380px); margin-bottom: 6rem; filter: drop-shadow(0px 4px 15px rgba(212, 175, 55, 0.4)); }
 
         /* --- SPAZIO TRA TITOLO E PRIMO BOTTONE --- */
         .splash-container h3 {
