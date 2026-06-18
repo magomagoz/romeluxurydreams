@@ -371,7 +371,7 @@ def inject_custom_css():
         
         .hero-wrapper {
             position: relative; width: 100%; height: auto; min-height: 520px; border-radius: 12px; overflow: hidden;
-            display: flex; align-items: center; justify-content: center; margin-top: 1rem; margin-bottom: 4rem;
+            display: flex; align-items: center; justify-content: center; margin-top: 1rem; margin-bottom: 2rem;
             box-shadow: 0 20px 50px rgba(0,0,0,0.6); border: 1px solid rgba(212, 175, 55, 0.15); padding: 3rem 1.5rem;
         }
         .hero-bg {
@@ -465,20 +465,6 @@ def render_main_site(lang_dict, is_rtl=False):
     logo_src = get_base64_of_image("logo.png")
     dir_attr = 'dir="rtl"' if is_rtl else ''
 
-    # --- BARRA DI NAVIGAZIONE SUPERIORE (TASTO CAMBIO LINGUA) ---
-    st.markdown('<div class="lang-switch-container">', unsafe_allow_html=True)
-    if is_rtl:
-        # Se è Arabo (RTL), allinea il tasto a sinistra
-        btn_col, spacer_col = st.columns([1, 4])
-        with btn_col:
-            st.button(lang_dict['back_btn'], on_click=reset_language, use_container_width=True)
-    else:
-        # Altrimenti allinealo a destra
-        spacer_col, btn_col = st.columns([4, 1])
-        with btn_col:
-            st.button(lang_dict['back_btn'], on_click=reset_language, use_container_width=True)
-    st.markdown('</div>', unsafe_allow_html=True)
-    
     # --- HERO SECTION ---
     hero_html = f"""
     <div class="hero-wrapper">
@@ -492,6 +478,20 @@ def render_main_site(lang_dict, is_rtl=False):
     </div>
     """
     st.markdown(hero_html, unsafe_allow_html=True)
+
+    # --- BARRA DI NAVIGAZIONE SUPERIORE (TASTO CAMBIO LINGUA) ---
+    st.markdown('<div class="lang-switch-container">', unsafe_allow_html=True)
+    if is_rtl:
+        # Se è Arabo (RTL), allinea il tasto a sinistra
+        btn_col, spacer_col = st.columns([1, 4])
+        with btn_col:
+            st.button(lang_dict['back_btn'], on_click=reset_language, use_container_width=True)
+    else:
+        # Altrimenti allinealo a destra
+        spacer_col, btn_col = st.columns([4, 1])
+        with btn_col:
+            st.button(lang_dict['back_btn'], on_click=reset_language, use_container_width=True)
+    st.markdown('</div>', unsafe_allow_html=True)
 
     # --- SERVICES SECTION ---
     st.markdown(f"<h2 class='section-header'>{lang_dict['services_header']}</h2>", unsafe_allow_html=True)
