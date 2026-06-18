@@ -396,7 +396,44 @@ TRANSLATIONS = {
             "form_success": "谢谢您 {name}。您的私人申请已在绝对保密的情况下妥善收到。",
             "form_error": "请填写必填项。",
             "back_btn": "🔙 更改语言"
+        },
+        "hi": {
+            "brand": "Rome Luxury Dreams",
+            "hero_title": "शाश्वत शहर (Rome) में आपके विशेष निवास की कुंजी",
+            "hero_subtitle": "ऑफ़-मार्केट रिसर्च, गोपनीय बातचीत, और रोम के सबसे प्रतिष्ठित रियल एस्टेट पोर्टफोलियो तक विशेष पहुंच।",
+            "services_header": "हमारी प्रॉपर्टी फाइंडर सेवा",
+            "srv1_title": "🔍 ऑफ़-मार्केट खोज",
+            "srv1_desc": "पारंपरिक चैनलों पर सूचीबद्ध न होने वाली संपत्तियों के एक अदृश्य पोर्टफोलियो तक पहुंच, जो पूर्ण विशिष्टता सुनिश्चित करती है।",
+            "srv2_title": "🤝 गोपनीय बातचीत",
+            "srv2_desc": "निवेशकों की पहचान और वित्तीय हितों की रक्षा के लिए अत्यंत गोपनीयता के साथ की गई बातचीत।",
+            "srv3_title": "🏛️ वास्तुकला विश्लेषण",
+            "srv3_desc": "ऐतिहासिक प्रतिबंधों, भवन निर्माण के स्तरों और ऐतिहासिक महलों की संरक्षण स्थिति का कठोर मूल्यांकन।",
+            "srv4_title": "🗝️ टर्नकी सेवा",
+            "srv4_desc": "संपत्ति की पहचान से लेकर कानूनी, नोटरी और इंटीरियर डिजाइन पहलुओं तक व्यापक सहायता।",
+            "expertise_header": "रोमन विशेषज्ञता",
+            "exp_sub": "पारंपरिक एजेंसी सीमाओं से परे",
+            "exp_text": "रोम में एक लक्जरी संपत्ति के मूल्य को समझने के लिए प्रति-वर्ग-मीटर अनुमान से कहीं अधिक की आवश्यकता होती है। इसके लिए इसके ऐतिहासिक शहरी ताने-बाने के विश्वकोशीय ज्ञान की आवश्यकता है। <br><br>प्राचीन ऑरेलियन दीवारों (Aurelian Walls) से लेकर बारोक चौकों (Baroque squares) की ओर देखने वाले शाही महलों तक। हम ऐसे निवासों की पहचान करते हैं जो केवल रहने की जगह नहीं हैं, बल्कि राजधानी के स्थापत्य इतिहास के सच्चे अंश हैं।",
+            "exp_list_title": "हमारे प्रमुख क्षेत्र",
+            "exp_l1": "<b style='color: var(--gold-accent)'>ऐतिहासिक केंद्र (Historic Centre):</b> ट्राइडेंट, नवोना, पैन्थियॉन।",
+            "exp_l2": "<b style='color: var(--gold-accent)'>पारियोली और पिंसियानो (Parioli & Pinciano):</b> ऐतिहासिक निवास और लालित्य।",
+            "exp_l3": "<b style='color: var(--gold-accent)'>एवेंटाइन हिल (Aventine Hill):</b> सर्कस मैक्सिमस से कुछ ही कदमों की दूरी पर शांति का नखलिस्तान।",
+            "exp_l4": "<b style='color: var(--gold-accent)'>त्रास्तेवेरे और जेनिकुलम (Trastevere & Janiculum):</b> बोहेमियन आकर्षण और शानदार दृश्य।",
+            "contact_header": "निजी परामर्श का अनुरोध करें",
+            "contact_sub": "अधिकतम गोपनीयता के साथ संपर्क किए जाने के लिए अपना विवरण छोड़ें।",
+            "form_name": "पूरा नाम *",
+            "form_email": "ईमेल *",
+            "form_phone": "फ़ोन नंबर",
+            "form_budget_label": "निवेश सीमा",
+            "form_budget_opts": ["निवेश सीमा चुनें", "€600,000 - €1,000,000", "€1,000,000 - €2,000,000", "€2,000,000 से अधिक"],
+            "form_timeline_label": "वांछित निष्पादन समय-सीमा",
+            "form_timeline_opts": ["तुरंत", "3 महीने", "6 महीने", "1 वर्ष"],
+            "form_msg": "विशिष्ट आवश्यकताएं (जैसे, छत, लिफ्ट, गैरेज)",
+            "form_btn": "गोपनीय अनुरोध भेजें",
+            "form_success": "धन्यवाद {name}। आपका अनुरोध पूर्ण गोपनीयता के साथ प्राप्त कर लिया गया है।",
+            "form_error": "कृपया अनिवार्य फ़ील्ड भरें।",
+            "back_btn": "🔙 भाषा बदलें"
         }
+
     }
 # ==========================================
 # INIZIALIZZAZIONE STATO (LINGUA)
@@ -555,20 +592,9 @@ def inject_rtl_css():
 # ==========================================
 # RENDER DELLA SPLASH PAGE (SELEZIONE LINGUA)
 # ==========================================
-def render_splash_page():
-    logo_src = get_base64_of_image("logo.png")
-    
-    # Intestazione con Logo e Titolo
-    st.markdown(f"""
-        <div class="splash-container">
-            <img src="{logo_src}" class="splash-logo" alt="Rome Luxury Dreams">
-            <h3>Select your language</h3>
-        </div>
-    """, unsafe_allow_html=True)
-    
-    # --- PRIMA FILA (4 Pulsanti) ---
-    # [1, 2, 2, 2, 2, 1] crea due spazi vuoti ai lati (1) e 4 colonne uguali al centro (2) per bilanciare il layout
-    _, col1, col2, col3, col4, _ = st.columns([1, 2, 2, 2, 2, 1])
+    # --- PRIMA FILA (3 Pulsanti) ---
+    # [1.5, 2, 2, 2, 1.5] allarga leggermente i margini laterali per bilanciare 3 colonne
+    _, col1, col2, col3, _ = st.columns([1.5, 2, 2, 2, 1.5])
     
     with col1:
         st.button("🇮🇹 Italiano", on_click=set_language, args=('it',), use_container_width=True)
@@ -576,23 +602,31 @@ def render_splash_page():
         st.button("🇬🇧 English", on_click=set_language, args=('en',), use_container_width=True)
     with col3:
         st.button("🇫🇷 Français", on_click=set_language, args=('fr',), use_container_width=True)
+        
+    st.markdown("<div style='margin-top: 10px;'></div>", unsafe_allow_html=True)
+        
+    # --- SECONDA FILA (3 Pulsanti) ---
+    _, col4, col5, col6, _ = st.columns([1.5, 2, 2, 2, 1.5])
+    
     with col4:
         st.button("🇪🇸 Español", on_click=set_language, args=('es',), use_container_width=True)
-        
-    # Aggiunge un piccolissimo spazio verticale tra le due file
-    #st.markdown("<div style='margin-top: 10px;'></div>", unsafe_allow_html=True)
-        
-    # --- SECONDA FILA (4 Pulsanti) ---
-    _, col5, col6, col7, col8, _ = st.columns([1, 2, 2, 2, 2, 1])
-    
     with col5:
         st.button("🇩🇪 Deutsch", on_click=set_language, args=('de',), use_container_width=True)
     with col6:
         st.button("🇷🇺 Русский", on_click=set_language, args=('ru',), use_container_width=True)
+
+    st.markdown("<div style='margin-top: 10px;'></div>", unsafe_allow_html=True)
+
+    # --- TERZA FILA (3 Pulsanti) ---
+    _, col7, col8, col9, _ = st.columns([1.5, 2, 2, 2, 1.5])
+    
     with col7:
         st.button("🇦🇪 العربية", on_click=set_language, args=('ar',), use_container_width=True)
     with col8:
         st.button("🇨🇳 中文 (简体)", on_click=set_language, args=('zh',), use_container_width=True)
+    with col9:
+        # Nuova aggiunta: Hindi
+        st.button("🇮🇳 हिन्दी", on_click=set_language, args=('hi',), use_container_width=True)
 
 def render_main_site(lang_dict, is_rtl=False):
     """Rende l'intero sito web utilizzando il dizionario della lingua scelta."""
