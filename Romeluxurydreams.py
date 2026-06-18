@@ -550,7 +550,7 @@ def inject_custom_css():
             height: 100%;
             object-fit: cover; /* Si comporta come 'background-size: cover' */
             z-index: 1;
-            opacity: 0.5; /* Trasparenza al 50% */
+            opacity: 0.9; /* Trasparenza al 50% */
         }
     
         /* L'OVERLAY SCURO (Serve a garantire il contrasto con i testi bianchi) */
