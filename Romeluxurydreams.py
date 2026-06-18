@@ -686,7 +686,7 @@ def render_main_site(lang_dict, is_rtl=False):
     logo_src = get_base64_of_image("logo.png")
     
     # Inserisci qui l'URL diretto del tuo video MP4
-    video_url = "https://tuodominio.com/video_background.mp4" 
+    video_url = "https://res.cloudinary.com/dcbyxecy4/video/upload/Video_vtviy5.mp4"
 
     # --- NUOVA HERO SECTION CON VIDEO ---
     hero_html = f"""
