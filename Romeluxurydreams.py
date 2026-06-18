@@ -348,7 +348,7 @@ def inject_custom_css():
             color: var(--text-muted); 
             font-weight: 300; 
             letter-spacing: 2px; 
-            margin-bottom: 0rem !important; /* Ridotto drasticamente da 2.5rem a 0.5rem */
+            margin-bottom: -2rem !important; /* Ridotto drasticamente da 2.5rem a 0.5rem */
             text-transform: uppercase;
         }
 
