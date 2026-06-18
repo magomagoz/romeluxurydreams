@@ -373,11 +373,23 @@ def render_splash_page():
     """, unsafe_allow_html=True)
     
     # Due colonne centrate per i pulsanti
-    col1, col2, col3, col4 = st.columns([1, 1, 1, 1])
-    with col2:
+    col1, col2, col3, col4, col5, col6, col7, col8 = st.columns([1, 1, 1, 1, 1, 1, 1, 1])
+    with col1:
         st.button("🇮🇹 Italiano", on_click=set_language, args=('it',))
-    with col3:
+    with col2:
         st.button("🇬🇧 English", on_click=set_language, args=('en',))
+    with col3:
+        st.button("🇬🇧 French", on_click=set_language, args=('fr',))
+    with col4:
+        st.button("🇬🇧 Spanish", on_click=set_language, args=('es',))
+    with col5:
+        st.button("🇬🇧 Deutsch", on_click=set_language, args=('de',))
+    with col6:
+        st.button("🇬🇧 English", on_click=set_language, args=('ru',))
+    with col7:
+        st.button("🇬🇧 English", on_click=set_language, args=('ar',))
+    with col8:
+        st.button("🇬🇧 English", on_click=set_language, args=('',))
 
 # ==========================================
 # RENDER DEL SITO PRINCIPALE
